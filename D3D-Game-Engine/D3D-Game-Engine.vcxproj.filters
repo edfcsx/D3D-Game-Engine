@@ -36,6 +36,9 @@
     <ClInclude Include="Window.h">
       <Filter>Engine\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Engine\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -49,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="WinGame.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Engine\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
