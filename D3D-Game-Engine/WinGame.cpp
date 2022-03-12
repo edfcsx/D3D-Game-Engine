@@ -147,7 +147,11 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	engine->window->Cursor(IDC_CURSOR);
 
 	// cria e inicia o jogo
-	engine->Start(new WinGame());
+	int exit_code = engine->Start(new WinGame());
+
+	// finaliza o jogo e motor
+	delete engine;
+	return exit_code;
 }
 
 // ----------------------------------------------------------------------------
