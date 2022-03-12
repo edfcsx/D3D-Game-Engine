@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "979f8b19-5485-4e28-9424-68c451bbbe7c": {
+      "ProjectGuid": "979f8b19-5485-4e28-9424-68c451bbbe7c",
+      "DisplayName": "D3D-Game-Engine",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
