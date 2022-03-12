@@ -23,7 +23,7 @@
 // ---------------------------------------------------------------------------------
 // Constantes globais e enumerações
 
-enum WindowModes { FULLSCREEN, WINDOWED };
+enum WindowModes { FULLSCREEN, WINDOWED, BORDELESS };
 
 // ---------------------------------------------------------------------------------
 

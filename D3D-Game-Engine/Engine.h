@@ -21,6 +21,7 @@
 
 #include "Game.h"								// implementação do jogo
 #include "Window.h"								// janela do jogo
+#include "Graphics.h"							// hardware gráfico
 
 // ---------------------------------------------------------------------------------
 
@@ -28,8 +29,9 @@ class Engine {
 private:
 	int Loop();									// inicia o laço de tempo real
 public:
-	static Game* game;						// jogo a ser executado
+	static Game* game;							// jogo a ser executado
 	static Window* window;						// janela do jogo
+	static Graphics* graphics;					// dispositivo gráfico
 
 	Engine();									// construtor
 	~Engine();									// destrutor

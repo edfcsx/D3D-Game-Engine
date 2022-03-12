@@ -15,7 +15,7 @@
 // -------------------------------------------------------------------------------
 // Inicialização de membros estáticos da classe
 
-bool Window::windowKeys[256] = { 0 };							// estado do teclado/mouse
+bool Window::windowKeys[256] = { 0 };						// estado do teclado/mouse
 int	 Window::windowMouseX = 0;								// estado do mouse no eixo x
 int  Window::windowMouseY = 0;								// estado do mouse no eixo y
 
@@ -23,20 +23,20 @@ int  Window::windowMouseY = 0;								// estado do mouse no eixo y
 // construtor
 
 Window::Window() {
-	hInstance = GetModuleHandle(NULL);				// identificador da aplicação
-	windowHandle = 0;									// identificador da janela do jogo
-	windowWidth = GetSystemMetrics(SM_CXSCREEN);		// a janela ocupa toda tela (tela cheia)
-	windowHeight = GetSystemMetrics(SM_CYSCREEN);		// a janela ocupa toda tela (tela cheia)
-	windowIcon = LoadIcon(NULL, IDI_APPLICATION);		// icone padrão de uma aplicação
-	windowCursor = LoadCursor(NULL, IDC_ARROW);			// cursor padrão de uma aplicação
-	windowColor = RGB(0, 0, 0);							// cor de fundo padrão é preta
-	windowTitle = std::string("Windows Game");			// título padrão da janela
-	windowStyle = WS_POPUP | WS_VISIBLE;				// estilo para tela cheia
-	windowMode = FULLSCREEN;							// modo padrão é tela cheia
-	windowPosX = 0;									// posição inicial da janela no eixo x
-	windowPosY = 0;									// posição inicial da janela no eixo y
-	windowCenterX = windowWidth / 2.0f;					// centro da janela no eixo x
-	windowCenterY = windowHeight / 2.0f;					// centro da janela no eixo y
+	hInstance		= GetModuleHandle(NULL);				// identificador da aplicação
+	windowHandle	= 0;									// identificador da janela do jogo
+	windowWidth		= GetSystemMetrics(SM_CXSCREEN);		// a janela ocupa toda tela (tela cheia)
+	windowHeight	= GetSystemMetrics(SM_CYSCREEN);		// a janela ocupa toda tela (tela cheia)
+	windowIcon		= LoadIcon(NULL, IDI_APPLICATION);		// icone padrão de uma aplicação
+	windowCursor	= LoadCursor(NULL, IDC_ARROW);			// cursor padrão de uma aplicação
+	windowColor		= RGB(0, 0, 0);							// cor de fundo padrão é preta
+	windowTitle		= std::string("Windows Game");			// título padrão da janela
+	windowStyle		= WS_POPUP | WS_VISIBLE;				// estilo para tela cheia
+	windowMode		= FULLSCREEN;							// modo padrão é tela cheia
+	windowPosX		= 0;									// posição inicial da janela no eixo x
+	windowPosY		= 0;									// posição inicial da janela no eixo y
+	windowCenterX	= windowWidth / 2.0f;					// centro da janela no eixo x
+	windowCenterY	= windowHeight / 2.0f;					// centro da janela no eixo y
 }
 
 // -------------------------------------------------------------------------------

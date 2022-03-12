@@ -21,19 +21,22 @@
 // ------------------------------------------------------------------------------
 // Inicialização de variáveis estáticas da classe
 
-Game* Engine::game = nullptr;		// jogo em execução
+Game* Engine::game = nullptr;			// jogo em execução
 Window* Engine::window = nullptr;		// janela do jogo
+Graphics* Engine::graphics = nullptr;	// dispositivo gráfico
 
 // -------------------------------------------------------------------------------
 
 Engine::Engine() {
-	window = new Window();
+	window	 = new Window();
+	graphics = new Graphics();
 }
 
 // -------------------------------------------------------------------------------
 
 Engine::~Engine() {
 	delete game;
+	delete graphics;
 	delete window;
 }
 
@@ -43,7 +46,16 @@ int Engine::Start(Game* level) {
 	game = level;
 
 	// cria a janela do jogo
-	window->Create();
+	if (!window->Create()) {
+		MessageBox(nullptr, "Falha na criação da janela", "Engine", MB_OK);
+		return EXIT_FAILURE;
+	}
+
+	// inicializa o dispositivo gráfico
+	if (!graphics->Initialize(window)) {
+		MessageBox(window->Id(), "Falha na inicialização do dispositivo gráfico", "Engine", MB_OK);
+		return EXIT_FAILURE;
+	}
 
 	// retorna o resultado da execução do jogo
 	return Loop();
@@ -52,22 +64,15 @@ int Engine::Start(Game* level) {
 // -------------------------------------------------------------------------------
 
 int Engine::Loop() {
-	MSG msg = { 0 };		// Mensagem do windows
-	HDC hdc;				// contexto do dispositivo
-	RECT rect;				// área cliente da janela
-
-	// captura o contexto do dispositivo
-	hdc = GetDC(window->Id());
-
-	// pega o tamanho da área cliente
-	GetClientRect(window->Id(), &rect);
-
 	// Inicialização do jogo
 	game->Init();
 
+	// mensagens do windows
+	MSG msg = { 0 };
+
 	// laço principal do jogo
 	do {
-		// trata todos os eventos e atualiza o jogo
+		// testa se tem mensagem do windows para tratar
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
@@ -76,11 +81,14 @@ int Engine::Loop() {
 			// Atualização do jogo
 			game->Update();
 
-			// limpa a área cliente
-			FillRect(hdc, &rect, CreateSolidBrush(window->Color()));
+			// limpa a tela para o próximo quadro
+			graphics->Clear();
 
 			// desenha o jogo
 			game->Draw();
+
+			// apresenta o jogo na tela (troca backbuffer/frontbuffer)
+			graphics->Present();
 
 			// controle de fps (quebra galho inicial)
 			Sleep(16);
@@ -89,9 +97,6 @@ int Engine::Loop() {
 
 	// finalização do jogo
 	game->Finalize();
-
-	// libera o contexto do dispositivo
-	ReleaseDC(window->Id(), hdc);
 
 	//encerra a aplicação
 	return int(msg.wParam);
