@@ -85,7 +85,6 @@ public:
 
 	COLORREF Color();										// retorna a cor de fundo da janela
 	void Color(int r, int g, int b);						// define a cor de fundo da janela
-	void Print(std::string, int x, int y, COLORREF color);	//mostra o texto usando a biblioteca do windows (lento)
 	bool Create();											// cria a janela com os valores dos atributos
 
 	// Tratamento de eventos do windows

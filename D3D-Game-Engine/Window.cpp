@@ -73,24 +73,6 @@ void Window::Size(int width, int height) {
 
 // -------------------------------------------------------------------------------
 
-void Window::Print(std::string text, int x, int y, COLORREF color) {
-	// esta função exibe o texto na posição (x,y) da tela usando a cor especificada
-	// ela usa a biblioteca do windows (lenta) e deve ser usada apenas para depuração
-
-	// pega o contexto do dispositivo gráfico
-	HDC xdc = GetDC(windowHandle);
-	// define a cor do texto
-	SetTextColor(xdc, color);
-	// define o fundo do texto como transparente
-	SetBkMode(xdc, TRANSPARENT);
-	// mostra o texto
-	TextOut(xdc, x, y, text.c_str(), int(text.size()));
-	// Libera o contexto do dispositivo
-	ReleaseDC(windowHandle, xdc);
-}
-
-// -------------------------------------------------------------------------------
-
 bool Window::Create() {
 	WNDCLASSEX wndClass;
 
