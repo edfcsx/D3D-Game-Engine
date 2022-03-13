@@ -11,6 +11,7 @@
 **********************************************************************************/
 
 #include "Window.h"
+#include "Engine.h"
 
 // -------------------------------------------------------------------------------
 // Inicialização de membros estáticos da classe
@@ -195,6 +196,12 @@ LRESULT CALLBACK Window::WinProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 		return 0;
 	case WM_RBUTTONUP:		// botão direito do mouse liberado
 		windowKeys[VK_RBUTTON] = false;
+		return 0;
+	case WM_SETFOCUS:		// mudança de foco da janela
+		Engine::Resume();
+		return 0;
+	case WM_KILLFOCUS:		// perca de foco da janela
+		Engine::Pause();
 		return 0;
 	case WM_DESTROY:		// destruição da janela
 		PostQuitMessage(0);

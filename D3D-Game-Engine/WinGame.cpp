@@ -56,12 +56,15 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	Engine* engine = new Engine();
 	
 	// configura a janela
-	engine->window->Mode(BORDELESS);
-	engine->window->Size(800, 600);
+	engine->window->Mode(WINDOWED);
+	engine->window->Size(960, 540);
 	engine->window->Color(240, 240, 140);
 	engine->window->Title("D3D Game");
 	engine->window->Icon(IDI_ICON);
 	engine->window->Cursor(IDC_CURSOR);
+
+	// travando fps conforme o vsync
+	//engine->graphics->VSync(true);
 
 	// cria e inicia o jogo
 	int exit_code = engine->Start(new WinGame());

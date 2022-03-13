@@ -20,7 +20,8 @@
 // -------------------------------------------------------------------------------
 // Inicialização de membros estáticos da classe
 
-Window*& Game::window = Engine::window;            // ponteiro para a janela
+Window* & Game::window	 = Engine::window;            // ponteiro para a janela
+float   & Game::gameTime = Engine::frameTime;		  // o tempo do ultimo quadro é uma referencia para Engine::frameTime
 
 // -------------------------------------------------------------------------------
 
@@ -29,5 +30,11 @@ Game::Game() {}
 // -------------------------------------------------------------------------------
 
 Game::~Game() {}
+
+// -------------------------------------------------------------------------------
+
+void Game::OnPause() {
+	Sleep(10);
+}
 
 // -------------------------------------------------------------------------------

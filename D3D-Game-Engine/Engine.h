@@ -22,21 +22,30 @@
 #include "Game.h"								// implementação do jogo
 #include "Window.h"								// janela do jogo
 #include "Graphics.h"							// hardware gráfico
+#include "Timer.h"								// medidor de tempo
 
 // ---------------------------------------------------------------------------------
 
 class Engine {
 private:
+	static Timer timer;							// medidor te tempo
+	static bool paused;							// estado do jogo
+
+	float FrameTime();							// calcula o tempo do quadro
 	int Loop();									// inicia o laço de tempo real
+
 public:
-	static Game* game;							// jogo a ser executado
-	static Window* window;						// janela do jogo
-	static Graphics* graphics;					// dispositivo gráfico
+	static Game		* game;						// jogo a ser executado
+	static Window	* window;					// janela do jogo
+	static Graphics * graphics;					// dispositivo gráfico
+	static float	  frameTime;				// tempo do quadro atual
 
 	Engine();									// construtor
 	~Engine();									// destrutor
 
-	int Start(Game* level);					// inicia a execução do jogo
+	int Start(Game* level);						// inicia a execução do jogo
+	static void Pause();						// pausa o jogo
+	static void Resume();						// reinicia o jogo
 };
 
 // ---------------------------------------------------------------------------------

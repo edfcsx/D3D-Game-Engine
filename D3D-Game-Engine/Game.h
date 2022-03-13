@@ -28,9 +28,12 @@ class Game {
 	// derivadas de Game serão capazes de acessar estes membros.
 protected:
 	static Window*& window;					// Janela do jogo
+	static float& gameTime;					// tempo do último quadro
 public:
-	Game();										// construtor
-	virtual ~Game();							// destrutor
+	Game();									// construtor
+	virtual ~Game();						// destrutor
+
+	virtual void OnPause();					// pausa do jogo
 
 	// Estes métodos são puramente virtuais, isto é, devem ser 
 	// implementados em todas as classes derivas de Game.
