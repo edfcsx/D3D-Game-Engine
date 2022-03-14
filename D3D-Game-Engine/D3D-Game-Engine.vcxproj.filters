@@ -45,6 +45,9 @@
     <ClInclude Include="Timer.h">
       <Filter>Engine\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Engine\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -63,6 +66,9 @@
       <Filter>Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
+      <Filter>Engine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
       <Filter>Engine\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
