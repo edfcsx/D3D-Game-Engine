@@ -11,9 +11,11 @@
 //
 **********************************************************************************/
 
+#include <sstream>
 #include "Resources.h"
 #include "Engine.h"
 #include "Game.h"
+#include "Timer.h"
 
 // ------------------------------------------------------------------------------
 
@@ -52,6 +54,9 @@ void WinGame::Finalize() {}
 // ------------------------------------------------------------------------------
 
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
+	Timer timer;
+	timer.Start();
+
 	// cria motor e configura a janela
 	Engine* engine = new Engine();
 	
@@ -65,6 +70,12 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
 	// travando fps conforme o vsync
 	//engine->graphics->VSync(true);
+
+	float elapsedTimer = timer.Elapsed();
+	std::stringstream text;
+	text << "Tempo transcorrido: " << elapsedTimer << "\n";
+
+	OutputDebugString(text.str().c_str());
 
 	// cria e inicia o jogo
 	int exit_code = engine->Start(new WinGame());
