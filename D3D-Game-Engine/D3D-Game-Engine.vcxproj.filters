@@ -19,6 +19,9 @@
     <Filter Include="Game">
       <UniqueIdentifier>{e1d7caf6-dc0b-42b9-ae6a-0e00028afef9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Shading Files">
+      <UniqueIdentifier>{9e2e79bb-1aaf-4718-9373-6fbfa49e71c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -67,5 +70,13 @@
     <ResourceCompile Include="Resources.rc">
       <Filter>Engine\Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Vertex.hlsl">
+      <Filter>Engine\Shading Files</Filter>
+    </FxCompile>
+    <FxCompile Include="Pixel.hlsl">
+      <Filter>Engine\Shading Files</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
