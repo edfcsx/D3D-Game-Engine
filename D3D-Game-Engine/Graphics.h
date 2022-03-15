@@ -25,22 +25,19 @@
 
 class Graphics {
 	private:
-		static ID3D11Device			* d3dDev;				// dispositivo gráfico
-		static ID3D11DeviceContext	* d3dDevContext;		// contexto do dispositivo gráfico
 		D3D_FEATURE_LEVEL			  featureLevel;			// nível de recursos D3D suportados pelo hardware
 		IDXGISwapChain				* swapChain;			// swap chain
 		ID3D11RenderTargetView		* renderTargetView;		// render target view do backbuffer
 		ID3D11BlendState			* blendState;			// configuração de mistura de cores
-		static D3D11_VIEWPORT		  viewport;				// viewport
 		float						  bgColor[4];			// cor de fundo do backbuffer
 		bool						  vSync;				// vertical sync
 	public:
 		Graphics();											// construtor
 		~Graphics();										// destrutor
 
-		static ID3D11Device			* Device();				// retorna o dispositivo do direct3D
-		static ID3D11DeviceContext	* Context();			// retorna o contexto do dispositivo D3D
-		static const D3D11_VIEWPORT   Viewport();			// retorna a viewport utilizada
+		static ID3D11Device			* device;				// dispositivo gráfico
+		static ID3D11DeviceContext  * context;	        	// contexto do dispositivo gráfico
+		static D3D11_VIEWPORT		  viewport;				// viewport
 
 		void VSync(bool state);								// liga/desliga vertical sync
 		void Clear();										// limpa o backbuffer com a cor de fundo
@@ -51,21 +48,6 @@ class Graphics {
 // ---------------------------------------------------------------------------------
 // Métodos Inline
 
-// retorna o dispositivo Direct3D
-inline ID3D11Device* Graphics::Device() {
-	return d3dDev;
-}
-
-// retorna o contexto do dispositivo D3D
-inline ID3D11DeviceContext* Graphics::Context() {
-	return d3dDevContext;
-}
-
-// retorna a viewport utilizada
-inline const D3D11_VIEWPORT Graphics::Viewport() {
-	return viewport;
-}
-
 // liga/desliga vertical sync
 inline void Graphics::VSync(bool state) {
 	vSync = state;
@@ -73,13 +55,13 @@ inline void Graphics::VSync(bool state) {
 
 // limpa o backbuffer para o próximo quadro
 inline void Graphics::Clear() {
-	d3dDevContext->ClearRenderTargetView(renderTargetView, bgColor);
+	context->ClearRenderTargetView(renderTargetView, bgColor);
 }
 
 // apresenta o desenho na tela (troca o frontbuffer com o backbuffer)
 inline void Graphics::Present() {
 	swapChain->Present(vSync, NULL);
-	d3dDevContext->OMSetRenderTargets(1, &renderTargetView, nullptr);
+	context->OMSetRenderTargets(1, &renderTargetView, nullptr);
 }
 // ---------------------------------------------------------------------------------
 

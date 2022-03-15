@@ -15,9 +15,9 @@
 // -------------------------------------------------------------------------------
 // Inicialização de membros estáticos da classe
 
-ID3D11Device* Graphics::d3dDev = nullptr;					// dispositivo gráfico
-ID3D11DeviceContext* Graphics::d3dDevContext = nullptr;		// contexto do dispositivo gráfico
-D3D11_VIEWPORT Graphics::viewport = { 0 };					// viewport
+ID3D11Device		* Graphics::device = nullptr;					// dispositivo gráfico
+ID3D11DeviceContext * Graphics::context = nullptr;					// contexto do dispositivo gráfico
+D3D11_VIEWPORT		  Graphics::viewport = { 0 };					// viewport
 
 // -------------------------------------------------------------------------------
 
@@ -60,17 +60,17 @@ Graphics::~Graphics() {
 	}
 
 	// libera o contexto do dispositivo gráfico
-	if (d3dDevContext) {
+	if (context) {
 		// restaura ao estado original
-		d3dDevContext->ClearState();
-		d3dDevContext->Release();
-		d3dDevContext = nullptr;
+		context->ClearState();
+		context->Release();
+		context = nullptr;
 	}
 
 	// libera o dispositivo gráfico
-	if (d3dDev) {
-		d3dDev->Release();
-		d3dDev = nullptr;
+	if (device) {
+		device->Release();
+		device = nullptr;
 	} 
 }
 
@@ -98,9 +98,9 @@ bool Graphics::Initialize(Window* window) {
 			NULL,							// featureLevels do direct3D (NULL = maior suportada)
 			0,								// tamanho do vetor featureLevels
 			D3D11_SDK_VERSION,				// versão do SDK do Direct3D
-			&d3dDev,						// guarda o dispositivo D3D criado
+			&device,						// guarda o dispositivo D3D criado
 			&featureLevel,					// versão do direct3D utilizada
-			&d3dDevContext))				// contexto do dispositivo D3D
+			&context))						// contexto do dispositivo D3D
 		return false;
 
 	// ----------------------------
@@ -121,7 +121,7 @@ bool Graphics::Initialize(Window* window) {
 
 	// Cria objeto para a infraestrutura gráfica
 	IDXGIDevice* dxgiDevice = nullptr;
-	if FAILED(d3dDev->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice))
+	if FAILED(device->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice))
 		return false;
 
 	// cria objeto para adaptador de video (placa gráfica)
@@ -155,7 +155,7 @@ bool Graphics::Initialize(Window* window) {
 	swapDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;		// muda resolução do monitor em tela
 
 	// cria uma swap chain
-	if FAILED(dxgiFactory->CreateSwapChain(d3dDev, &swapDesc, &swapChain))
+	if FAILED(dxgiFactory->CreateSwapChain(device, &swapDesc, &swapChain))
 		return false;
 
 	// impede a DXGI de monitorar ALT + ENTER e alterar entre windowed/fullscreen
@@ -172,11 +172,11 @@ bool Graphics::Initialize(Window* window) {
 		return false;
 
 	// cria uma render-target view do backbuffer
-	if FAILED(d3dDev->CreateRenderTargetView(backBuffer, NULL, &renderTargetView))
+	if FAILED(device->CreateRenderTargetView(backBuffer, NULL, &renderTargetView))
 		return false;
 
 	// liga uma render-target ao estágio de output-merger
-	d3dDevContext->OMSetRenderTargets(1, &renderTargetView, nullptr);
+	context->OMSetRenderTargets(1, &renderTargetView, nullptr);
 
 	// ----------------------------
 	// Viewport / Rasterizar
@@ -191,7 +191,7 @@ bool Graphics::Initialize(Window* window) {
 	viewport.MaxDepth = 1.0f;
 
 	// liga a viewportao estágio de rasterização
-	d3dDevContext->RSSetViewports(1, &viewport);
+	context->RSSetViewports(1, &viewport);
 
 	// ----------------------------
 	// Blend State
@@ -216,11 +216,11 @@ bool Graphics::Initialize(Window* window) {
 	blendDesc.RenderTarget[0].RenderTargetWriteMask = 0x0F;				// componentes de cada pixel que podem ser sobrescritos
 
 	// cria o blend state
-	if FAILED(d3dDev->CreateBlendState(&blendDesc, &blendState))
+	if FAILED(device->CreateBlendState(&blendDesc, &blendState))
 		return false;
 
 	// liga o blend state ao estagio de Output-Merger
-	d3dDevContext->OMSetBlendState(blendState, nullptr, 0xffffffff);
+	context->OMSetBlendState(blendState, nullptr, 0xffffffff);
 
 	// ----------------------------
 	// Libera interface DXGI
