@@ -24,21 +24,24 @@
 Game	 * Engine::game		 = nullptr;			// jogo em execução
 Window   * Engine::window    = nullptr;			// janela do jogo
 Graphics * Engine::graphics  = nullptr;			// dispositivo gráfico
+Renderer * Engine::renderer  = nullptr;			// renderizador de sprites
 float	   Engine::frameTime = 0.0f;			// tempo do quadro atual
-bool       Engine::paused    = false;
-Timer      Engine::timer;
+bool       Engine::paused    = false;			// estado do game loop
+Timer      Engine::timer;						// medidor de tempo
 
 // -------------------------------------------------------------------------------
 
 Engine::Engine() {
 	window	 = new Window();
 	graphics = new Graphics();
+	renderer = new Renderer();
 }
 
 // -------------------------------------------------------------------------------
 
 Engine::~Engine() {
 	delete game;
+	delete renderer;
 	delete graphics;
 	delete window;
 }
@@ -57,6 +60,12 @@ int Engine::Start(Game* level) {
 	// inicializa o dispositivo gráfico
 	if (!graphics->Initialize(window)) {
 		MessageBox(window->Id(), "Falha na inicialização do dispositivo gráfico", "Engine", MB_OK);
+		return EXIT_FAILURE;
+	}
+
+	// inicializa renderizador de sprites
+	if (!renderer->Initialize(window, graphics)) {
+		MessageBox(window->Id(), "Falha na criação do renderizador", "Engine", MB_OK);
 		return EXIT_FAILURE;
 	}
 
@@ -145,6 +154,9 @@ int Engine::Loop() {
 
 				// desenha o jogo
 				game->Draw();
+
+				// renderiza sprites
+				renderer->Render();
 
 				// apresenta o jogo na tela (troca backbuffer/frontbuffer)
 				graphics->Present();

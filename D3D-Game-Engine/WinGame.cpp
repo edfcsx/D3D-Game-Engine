@@ -16,11 +16,20 @@
 #include "Engine.h"
 #include "Game.h"
 #include "Timer.h"
+#include "Sprite.h"
 
 // ------------------------------------------------------------------------------
 
 class WinGame : public Game {
 	private:
+		Sprite* backg = nullptr;            // sprite do fundo de tela
+		Sprite* shank = nullptr;            // sprite do personagem 
+
+		Image* logoImg = nullptr;           // imagem do logotipo
+		Sprite* logo1 = nullptr;            // sprite 1 do logotipo
+		Sprite* logo2 = nullptr;            // sprite 2 do logotipo
+
+		float x = 0, y = 0;                 // posição x,y do shank
 	public:
 		void Init();
 		void Update();
@@ -30,22 +39,56 @@ class WinGame : public Game {
 
 // ------------------------------------------------------------------------------
 
-void WinGame::Init() {}
+void WinGame::Init() {
+	backg = new Sprite("Resources/Background.jpg");
+	shank = new Sprite("Resources/Shank.png");
+
+	logoImg = new Image("Resources/Logo.png");
+	logo1 = new Sprite(logoImg);
+	logo2 = new Sprite(logoImg);
+
+	x = 80.0f;
+	y = 90.0f;
+}
 
 // ------------------------------------------------------------------------------
 
 void WinGame::Update() {
 	if (window->KeyDown(VK_ESCAPE))
 		window->Close();
+
+	// desloca personagem
+	if (window->KeyDown(VK_LEFT))
+		x -= 50.0f * gameTime;
+	if (window->KeyDown(VK_RIGHT))
+		x += 50.0f * gameTime;
+	if (window->KeyDown(VK_UP))
+		y -= 50.0f * gameTime;
+	if (window->KeyDown(VK_DOWN))
+		y += 50.0f * gameTime;
 }
 
 // ------------------------------------------------------------------------------
 
-void WinGame::Draw() {}
+void WinGame::Draw() {
+	backg->Draw(0.0f, 0.0f, Layer::BACK);
+	shank->Draw(x, y);
+	logo1->Draw(40.0f, 60.0f, Layer::UPPER);
+	logo2->Draw(400.0f, 450.0f, Layer::LOWER);
+}
 
 // ------------------------------------------------------------------------------
 
-void WinGame::Finalize() {}
+void WinGame::Finalize() {
+	// remove sprites da memória
+	delete backg;
+	delete shank;
+	delete logo1;
+	delete logo2;
+
+	// remove imagem da memória
+	delete logoImg;
+}
 
 // ------------------------------------------------------------------------------
 
@@ -62,8 +105,8 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	
 	// configura a janela
 	engine->window->Mode(WINDOWED);
-	engine->window->Size(960, 540);
-	engine->window->Color(240, 240, 140);
+	engine->window->Size(800, 600);
+	engine->window->Color(0, 0, 0);
 	engine->window->Title("D3D Game");
 	engine->window->Icon(IDI_ICON);
 	engine->window->Cursor(IDC_CURSOR);

@@ -12,7 +12,7 @@
 
 // matriz de transformação e projeção
 cbuffer ConstantBuffer {
-	float4x4 WolrdViewProj;
+	float4x4 WorldViewProj;
 };
 
 // estrutura dos vertices de entrada
@@ -34,7 +34,7 @@ VertexOut main(VertexIn vIn) {
 	VertexOut vOut;
 
 	// transforma os vertices para coordenadas na tela
-	vOut.pos = mul(float4(vIn.Pos, 1.0f), WorldViewProj);
+	vOut.Pos = mul(float4(vIn.Pos, 1.0f), WorldViewProj);
 
 	// mantém as cores inalteradas
 	vOut.Color = vIn.Color;
