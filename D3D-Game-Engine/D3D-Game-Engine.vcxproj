@@ -145,9 +145,12 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="Shank.h" />
+    <ClInclude Include="ShankGame.h" />
+    <ClInclude Include="SpriteDemo.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
@@ -159,8 +162,11 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shank.cpp" />
+    <ClCompile Include="ShankGame.cpp" />
+    <ClCompile Include="SpriteDemo.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />

@@ -25,8 +25,11 @@
     <Filter Include="Demo">
       <UniqueIdentifier>{a51001ed-8588-455d-a73d-0784b6f856bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Demo\Shank">
+    <Filter Include="Demo\SpriteDemo">
       <UniqueIdentifier>{728ba415-dfb4-4304-af03-45ebc87ea739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Demo\Shank">
+      <UniqueIdentifier>{da6cfb59-6b96-4c87-83e4-ffc73a5e8df1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,7 +66,16 @@
     <ClInclude Include="Renderer.h">
       <Filter>Engine\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteDemo.h">
+      <Filter>Demo\SpriteDemo</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Engine\Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Shank.h">
+      <Filter>Demo\Shank</Filter>
+    </ClInclude>
+    <ClInclude Include="ShankGame.h">
       <Filter>Demo\Shank</Filter>
     </ClInclude>
   </ItemGroup>
@@ -98,7 +110,16 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Engine\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteDemo.cpp">
+      <Filter>Demo\SpriteDemo</Filter>
+    </ClCompile>
     <ClCompile Include="Shank.cpp">
+      <Filter>Demo\Shank</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Engine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShankGame.cpp">
       <Filter>Demo\Shank</Filter>
     </ClCompile>
   </ItemGroup>

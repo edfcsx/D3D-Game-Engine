@@ -1,24 +1,45 @@
-#ifndef _PROGJOGOS_DEMO_SHANK_H_
-#define _PROGJOGOS_DEMO_SHANK_H_
+/**********************************************************************************
+// Shank (Arquivo de Cabeçalho)
+//
+// Criação:     21 Dez 2012
+// Atualização: 14 Ago 2021
+// Compilador:  Visual C++ 2019
+//
+// Descrição:   Define personagem Shank como um objeto do jogo
+//
+**********************************************************************************/
 
-#include "Game.h"
-#include "Sprite.h"
+#ifndef _SHANKDEMO_SHANK_H_
+#define _SHANKDEMO_SHANK_H_
 
-class Shank : public Game {
+// ---------------------------------------------------------------------------------
+// Inclusões
+
+#include "Types.h"             // tipos específicos da engine
+#include "Object.h"            // interface de object
+#include "Sprite.h"            // interface de sprites
+#include "Engine.h"
+
+//Window*& Object::window = Engine::window;		// ponteiro para a janela
+//float& Object::gameTime = Engine::frameTime;	// tempo do último quadro
+
+// ---------------------------------------------------------------------------------
+
+class Shank : public Object {
 private:
-	Sprite* backg = nullptr;
-	Sprite* shank = nullptr;
+    Sprite* sprite;
 
-	Image* logoImg = nullptr;
-	Sprite* logo1 = nullptr;
-	Sprite* logo2 = nullptr;
-
-	float x = 0, y = 0;
 public:
-	void Init();
-	void Update();
-	void Draw();
-	void Finalize();
+    Shank();
+    ~Shank();
+
+    void Update();
+    void Draw();
 };
 
+// ---------------------------------------------------------------------------------
+
 #endif
+
+//Object::Object() {}
+//Object::~Object() {}

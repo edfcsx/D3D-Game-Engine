@@ -16,7 +16,11 @@
 #include "Engine.h"
 #include "Game.h"
 #include "Timer.h"
-#include "Shank.h"
+
+// ------------------------------------------------------------------------------
+// Demonstrações de jogos e funcionalidades
+#include "SpriteDemo.h"
+#include "ShankGame.h"
 
 // ------------------------------------------------------------------------------
 
@@ -49,7 +53,8 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	OutputDebugString(text.str().c_str());
 
 	// cria e inicia o jogo
-	int exit_code = engine->Start(new Shank());
+	//int exit_code = engine->Start(new SpriteDemo());
+	int exit_code = engine->Start(new ShankGame());
 
 	// finaliza o jogo e motor
 	delete engine;
